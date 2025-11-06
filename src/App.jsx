@@ -2,6 +2,7 @@ import React from "react";
 import Basictable from "./component/Basictable";
 import MergedCellTable from "./component/MergeCells";
 import GroupingHeader from "./component/GroupingHeader";
+import CellFormatting from "./component/CellFormatting";
 
 function App() {
   return (
@@ -18,6 +19,11 @@ function App() {
         Grouping header into one
       </div>
       <GroupingHeader />
+      {/* Cell Formatting */}
+      <div className="py-10 text-center text-2xl font-syne">
+        Cell Formating using cell in the column def
+      </div>
+      <CellFormatting />
     </div>
   );
 }
