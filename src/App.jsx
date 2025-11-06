@@ -5,6 +5,7 @@ import GroupingHeader from "./component/GroupingHeader";
 import CellFormatting from "./component/CellFormatting";
 import SortedTable from "./component/SortingTable";
 import GlobalFiltering from "./component/GlobalFiltering";
+import ColumnFiltering from "./component/ColumnFiltering";
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
         Global Filter Table
       </div>
       <GlobalFiltering />
+      {/* Column Filter Table */}
+      <div className="py-10 text-center text-2xl font-syne">
+        Column Filter Table
+      </div>
+      <ColumnFiltering />
     </div>
   );
 }
