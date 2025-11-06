@@ -1,4 +1,4 @@
-export const CellFormattingColumnsDef = [
+export const SortingTableColumnsDef = [
   {
     header: "ID",
     accessorKey: "id",
@@ -30,9 +30,5 @@ export const CellFormattingColumnsDef = [
   {
     header: "Phone",
     accessorKey: "phone",
-    cell: ({ row }) => {
-      const phone = row.original.phone;
-      return phone ? phone.split("-").join("") : "";
-    },
   },
 ];

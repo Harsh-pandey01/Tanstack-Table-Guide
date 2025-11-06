@@ -3,6 +3,7 @@ import Basictable from "./component/Basictable";
 import MergedCellTable from "./component/MergeCells";
 import GroupingHeader from "./component/GroupingHeader";
 import CellFormatting from "./component/CellFormatting";
+import SortedTable from "./component/SortingTable";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         Cell Formating using cell in the column def
       </div>
       <CellFormatting />
+      {/* Sorted Table */}
+      <div className="py-10 text-center text-2xl font-syne">Sorted Table</div>
+      <SortedTable />
     </div>
   );
 }
