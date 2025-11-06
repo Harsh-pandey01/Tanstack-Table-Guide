@@ -6,6 +6,7 @@ import CellFormatting from "./component/CellFormatting";
 import SortedTable from "./component/SortingTable";
 import GlobalFiltering from "./component/GlobalFiltering";
 import ColumnFiltering from "./component/ColumnFiltering";
+import PaginationTable from "./component/PaginationTable";
 
 function App() {
   return (
@@ -40,6 +41,11 @@ function App() {
         Column Filter Table
       </div>
       <ColumnFiltering />
+      {/* Pagination Table */}
+      <div className="py-10 text-center text-2xl font-syne">
+        Pagination Table
+      </div>
+      <PaginationTable />
     </div>
   );
 }
