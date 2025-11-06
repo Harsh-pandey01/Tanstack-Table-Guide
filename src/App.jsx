@@ -4,6 +4,7 @@ import MergedCellTable from "./component/MergeCells";
 import GroupingHeader from "./component/GroupingHeader";
 import CellFormatting from "./component/CellFormatting";
 import SortedTable from "./component/SortingTable";
+import GlobalFiltering from "./component/GlobalFiltering";
 
 function App() {
   return (
@@ -28,6 +29,11 @@ function App() {
       {/* Sorted Table */}
       <div className="py-10 text-center text-2xl font-syne">Sorted Table</div>
       <SortedTable />
+      {/* Global Filter Table */}
+      <div className="py-10 text-center text-2xl font-syne">
+        Global Filter Table
+      </div>
+      <GlobalFiltering />
     </div>
   );
 }
