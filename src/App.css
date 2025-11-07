@@ -1,6 +1,25 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Syne:wght@400..800&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+:root {
+    --color-primary : #fff ;
+    --color-text : #000 ;
+    --color-border : var(--color-neutral-200);
+}
+
+.dark {
+    --color-primary : var(--color-neutral-800) ;
+    --color-text : var(--color-neutral-100);
+    --color-border : var(--color-neutral-700);
+}
+
+@theme inline {
+    --color-primary : var(--color-primary);
+    --color-text : var(--color-text);
+    --color-border : var(--color-border);
+}
+
 
 @theme {
     --font-syne : "Syne" , sans-serif ;
