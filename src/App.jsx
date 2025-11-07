@@ -7,6 +7,7 @@ import SortedTable from "./component/SortingTable";
 import GlobalFiltering from "./component/GlobalFiltering";
 import ColumnFiltering from "./component/ColumnFiltering";
 import PaginationTable from "./component/PaginationTable";
+import RowSelectionTable from "./component/RowSelection";
 
 function App() {
   return (
@@ -46,6 +47,11 @@ function App() {
         Pagination Table
       </div>
       <PaginationTable />
+      {/* Row Selection Table */}
+      <div className="py-10 text-center text-2xl font-syne">
+        Row Selection table
+      </div>
+      <RowSelectionTable />
     </div>
   );
 }

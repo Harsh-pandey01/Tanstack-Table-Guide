@@ -1,16 +1,91 @@
-# React + Vite
+import React, { useState } from "react";
+import data from "/MOCK_DATA";
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table";
+import { basicColumnDef } from "./columns/BasicColumn";
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+const RowSelectionTable = () => {
+  const [rowSelection, setRowSelection] = useState({}); // ✅ stores selected rows
 
-Currently, two official plugins are available:
+  const table = useReactTable({
+    data,
+    columns: basicColumnDef,
+    state: {
+      rowSelection,
+    },
+    onRowSelectionChange: setRowSelection,
+    enableRowSelection: true, // ✅ enables selection
+    getCoreRowModel: getCoreRowModel(),
+  });
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  return (
+    <div>
+      {/* 🌟 Selection Count */}
+      <p className="mb-2">Selected Rows: {Object.keys(rowSelection).length}</p>
 
-## React Compiler
+      <table className="border w-full">
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {/* ✅ Select All Checkbox */}
+              <th>
+                <input
+                  type="checkbox"
+                  {...{
+                    checked: table.getIsAllRowsSelected(),
+                    indeterminate: table.getIsSomeRowsSelected(),
+                    onChange: table.getToggleAllRowsSelectedHandler(),
+                  }}
+                />
+              </th>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} className="border px-4 py-2">
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {/* ✅ Each Row Checkbox */}
+              <td className="border px-4 py-2">
+                <input
+                  type="checkbox"
+                  {...{
+                    checked: row.getIsSelected(),
+                    onChange: row.getToggleSelectedHandler(),
+                  }}
+                />
+              </td>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className="border px-4 py-2">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-## Expanding the ESLint configuration
+      {/* ✅ Example Selected Data */}
+      <pre className="mt-4">
+        {JSON.stringify(
+          table.getSelectedRowModel().flatRows.map((row) => row.original),
+          null,
+          2
+        )}
+      </pre>
+    </div>
+  );
+};
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+export default RowSelectionTable;
