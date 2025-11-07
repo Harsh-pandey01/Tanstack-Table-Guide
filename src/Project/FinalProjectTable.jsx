@@ -3,6 +3,7 @@ import {
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
 import { finalProjectColumnDef } from "./finalProjectColumnDef";
 import data from "/MOCK_DATA";
@@ -13,22 +14,34 @@ function FinalProjectTable() {
     pageIndex: 0,
     pageSize: 10,
   });
-
+  const [globalFilterState, setGlobalFilter] = useState("");
   const tableInstance = useReactTable({
     data,
     columns: finalProjectColumnDef,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
       pagination: pagination,
+      globalFilter: globalFilterState,
     },
+    onGlobalFilterChange: setGlobalFilter,
     onPaginationChange: setPagination,
   });
 
   return (
     <div className="max-w-300 w-300  mx-auto">
       <h1 className="font-inter text-end">Admin Table</h1>
-      <table className="w-full mt-10 border border-border">
+      <div>
+        <input
+          type="text"
+          className="border-border w-100 border px-1.5 py-2 font-inter text-xs"
+          placeholder="Filter Products"
+          value={globalFilterState}
+          onChange={(e) => setGlobalFilter(e.target.value)}
+        />
+      </div>
+      <table className="w-full mt-3 border border-border">
         <thead>
           {tableInstance.getHeaderGroups().map((headerGroup) => {
             return (

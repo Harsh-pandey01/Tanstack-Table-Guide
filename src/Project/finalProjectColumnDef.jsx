@@ -24,6 +24,10 @@ export const finalProjectColumnDef = [
   {
     accessorKey: "id",
     header: "ID",
+    filterFn: (row, columnId, filterValue) => {
+      const cellValue = row.getValue(columnId);
+      return String(cellValue).includes(String(filterValue));
+    },
   },
   {
     header: "User Name",
@@ -48,5 +52,9 @@ export const finalProjectColumnDef = [
   {
     header: "Phone",
     accessorKey: "phone",
+    cell: (row) => {
+      const val = row.getValue();
+      return val.split("-").join("");
+    },
   },
 ];
