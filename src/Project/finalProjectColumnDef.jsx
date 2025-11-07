@@ -20,6 +20,7 @@ export const finalProjectColumnDef = [
         onChange={row.getToggleSelectedHandler()}
       />
     ),
+    enableSorting: false,
   },
   {
     accessorKey: "id",

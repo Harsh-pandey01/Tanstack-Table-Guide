@@ -4,10 +4,12 @@ import {
   useReactTable,
   getPaginationRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import { finalProjectColumnDef } from "./finalProjectColumnDef";
 import data from "/MOCK_DATA";
 import { useState } from "react";
+import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
 
 function FinalProjectTable() {
   const [pagination, setPagination] = useState({
@@ -15,16 +17,21 @@ function FinalProjectTable() {
     pageSize: 10,
   });
   const [globalFilterState, setGlobalFilter] = useState("");
+  const [sortingState, setSortedState] = useState([]);
+
   const tableInstance = useReactTable({
     data,
     columns: finalProjectColumnDef,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     state: {
       pagination: pagination,
       globalFilter: globalFilterState,
+      sorting: sortingState,
     },
+    onSortingChange: setSortedState,
     onGlobalFilterChange: setGlobalFilter,
     onPaginationChange: setPagination,
   });
@@ -51,11 +58,27 @@ function FinalProjectTable() {
                     <th
                       key={header.id}
                       className="border border-border px-2 py-2.5 font-syne text-sm"
+                      onClick={header.column.getToggleSortingHandler()}
                     >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      <div className="flex justify-center items-center gap-1">
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+
+                        {header.column.getCanSort() &&
+                          (header.column.getIsSorted() ? (
+                            {
+                              desc: <IoIosArrowRoundDown />,
+                              asc: <IoIosArrowRoundUp />,
+                            }[header.column.getIsSorted()]
+                          ) : (
+                            <div className="flex items-center justify-center">
+                              <IoIosArrowRoundUp />
+                              <IoIosArrowRoundDown />
+                            </div>
+                          ))}
+                      </div>
                     </th>
                   );
                 })}
