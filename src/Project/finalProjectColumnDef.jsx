@@ -22,6 +22,10 @@ export const finalProjectColumnDef = [
     ),
   },
   {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
     header: "User Name",
     accessorFn: (row) => `${row.first_name} ${row.last_name}`,
   },

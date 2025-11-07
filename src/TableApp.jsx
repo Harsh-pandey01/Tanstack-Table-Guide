@@ -3,7 +3,7 @@ import FinalProjectTable from "./Project/FinalProjectTable";
 
 function TableApp() {
   return (
-    <div className="h-fit py-10 bg-primary text-text w-full">
+    <div className=" min-h-screen py-10 bg-primary text-text w-full">
       <FinalProjectTable />
     </div>
   );
